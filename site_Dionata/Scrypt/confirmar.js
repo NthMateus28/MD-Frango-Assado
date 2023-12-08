@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function salvarPedidoLocal() {
         const nome = document.getElementById("nome").value;
-        // const telefone = document.getElementById("telefone").value;:
+        const telefone = document.getElementById("telefone").value;
         const tipoRetirada = document.querySelector(
             'input[name="retirada"]:checked'
         ).value;
@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const pedido = {
             nome,
-            telefoneInput,
+            telefone, // Salvar o valor do telefone, não a referência do elemento
             tipoRetirada,
             bairro,
             endereco,
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let mensagem = `Quero realizar meu pedido! Segue os dados do meu Pedido:\n\n`;
         mensagem += `*Nome:* ${pedido.nome}\n`;
-        mensagem += `*Telefone:* ${pedido.telefoneInput}\n`;
+        mensagem += `*Telefone:* ${pedido.telefone}\n`;
         mensagem += `*Tipo de retirada:* ${pedido.tipoRetirada}\n`;
 
         if (pedido.tipoRetirada === "Tele Entrega") {
