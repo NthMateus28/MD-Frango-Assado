@@ -1,9 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const table = document.querySelector("table"); // Seleciona a tabela onde os produtos serão inseridos
-    let finalPrice = document.getElementById("finalPrice"); // Elemento que exibirá o preço final
-    let finalFrete = document.getElementById("finalFrete"); // Elemento que exibirá o valor do frete
-    let finalTotal = document.getElementById("finalTotal"); // Elemento que exibirá o total
+    const telefoneInput = document.getElementById("telefone");
 
+    // Função para aplicar a máscara de telefone e limitar o número de caracteres
+    telefoneInput.addEventListener("input", function (event) {
+        const input = event.target;
+        const inputLength = input.value.length;
+
+        if (isNaN(input.value[inputLength - 1])) {
+            input.value = input.value.substring(0, inputLength - 1);
+            return;
+        }
+
+        if (inputLength === 1) {
+            input.value = `(${input.value}`;
+        } else if (inputLength === 3) {
+            input.value = `${input.value}) `;
+        } else if (inputLength === 10) {
+            input.value = `${input.value}-`;
+        } else if (inputLength > 15) {
+            input.value = input.value.substring(0, 15);
+        }
+    });
+
+    const table = document.querySelector("table");
+    let finalPrice = document.getElementById("finalPrice");
+    let finalFrete = document.getElementById("finalFrete");
+    let finalTotal = document.getElementById("finalTotal");
     const teleEntregaRadio = document.getElementById("teleEntrega");
     const tirarBalcaoRadio = document.getElementById("tirarBalcao");
     const bairrosLabel = document.querySelector('label[for="bairros"]');
@@ -55,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function salvarPedidoLocal() {
         const nome = document.getElementById("nome").value;
-        const telefone = document.getElementById("telefone").value;
+        // const telefone = document.getElementById("telefone").value;:
         const tipoRetirada = document.querySelector(
             'input[name="retirada"]:checked'
         ).value;
@@ -68,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const pedido = {
             nome,
-            telefone,
+            telefoneInput,
             tipoRetirada,
             bairro,
             endereco,
@@ -87,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let mensagem = `Quero realizar meu pedido! Segue os dados do meu Pedido:\n\n`;
         mensagem += `*Nome:* ${pedido.nome}\n`;
-        mensagem += `*Telefone:* ${pedido.telefone}\n`;
+        mensagem += `*Telefone:* ${pedido.telefoneInput}\n`;
         mensagem += `*Tipo de retirada:* ${pedido.tipoRetirada}\n`;
 
         if (pedido.tipoRetirada === "Tele Entrega") {
