@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mensagem += `*Frete:* ${pedido.frete}\n`;
         mensagem += `*Total:* ${pedido.total}\n\n`;
         mensagem += `*CASO QUEIRA ACOMPANHAR SEU PEDIDO É SÓ CLICAL NO SEGUINTE LINK:*\n\n`;
-        mensagem += `https://nthmateus28.github.io/MD_Frango_Assado/site_Dionata/pages/pedidos.html`;
+        mensagem += `https://bit.ly/Acompanhar_Pedido`;
 
         const linkWhatsApp = `https://api.whatsapp.com/send?phone=5554991965403&text=${encodeURIComponent(
             mensagem
