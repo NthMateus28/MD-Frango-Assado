@@ -40,6 +40,14 @@ td {
     border: 1px solid #ddd;
 }
 
+.butons {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center; /* Adiciona alinhamento vertical */
+}
+
 body > div > button.enviarWhats {
     font-size: 15px;
     margin-top: 100px;
@@ -56,12 +64,9 @@ body > div > button.enviarWhats {
     margin-bottom: 10px;
 }
 
-.butons {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    align-items: center; /* Adiciona alinhamento vertical */
+body > div > button.enviarWhats:hover {
+    background-color: #128c7e;
+    color: #fff;
 }
 
 .butons > button {
@@ -79,11 +84,11 @@ body > div > button.enviarWhats {
     margin-bottom: 10px;
 }
 
-.butons > button:last-child {
-    margin-bottom: 100px;
+.butons > button:hover {
+    background-color: rgb(161, 37, 37);
+    color: #fff;
 }
 
-.butons > button:hover {
-    background-color: #128c7e;
-    color: #fff;
+.butons > button:last-child {
+    margin-bottom: 100px;
 }
