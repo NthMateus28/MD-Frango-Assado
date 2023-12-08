@@ -67,4 +67,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Chama a função para criar a tabela do pedido
     criarTabelaPedido();
+
+    const cancelarPedidoButton = document.querySelector(
+        ".butons > button:nth-child(2)"
+    );
+
+    cancelarPedidoButton.addEventListener("click", () => {
+        const pedidoSalvo = localStorage.getItem("pedido");
+
+        if (pedidoSalvo) {
+            const pedido = JSON.parse(pedidoSalvo);
+
+            let mensagem = `Quero cancelar meu pedido! Os dados dele são os seguintes:\n\n`;
+            mensagem += `Nome: ${pedido.nome}\n`;
+            mensagem += `Telefone: ${pedido.telefone}\n`;
+            mensagem += `Tipo de retirada: ${pedido.tipoRetirada}\n`;
+
+            if (pedido.tipoRetirada === "Tele Entrega") {
+                mensagem += `Bairro: ${pedido.bairro}\n`;
+                mensagem += `Endereço: ${pedido.endereco}\n`;
+            }
+
+            mensagem += `Forma de pagamento: ${pedido.formaPagamento}\n`;
+            mensagem += `Soma dos produtos: ${pedido.somaProdutos}\n`;
+            mensagem += `Frete: ${pedido.frete}\n`;
+            mensagem += `Total: ${pedido.total}\n`;
+
+            const linkWhatsApp = `https://api.whatsapp.com/send?phone=5554991965403&text=${encodeURIComponent(
+                mensagem
+            )}`;
+            window.open(linkWhatsApp);
+        } else {
+            alert("Pedido não encontrado!");
+        }
+    });
 });
