@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const products = document.querySelectorAll(".product");
     const valorFinalElement = document.querySelector(".resultadoFinal");
-    const precos = [45, 55, 45, 50, 48, 60, 3, 2, 6, 6, 15, 12];
+    const precos = [45, 55, 45, 50, 48, 60, 3, 2, 6, 6, 4.50, 14, 15, 12];
 
     localStorage.clear();
 
