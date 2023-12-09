@@ -118,8 +118,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (pedido.formaPagamento === "PIX") {
-            mensagem += `*Forma de pagamento:* ${pedido.formaPagamento}\n`;
-            mensagem += `*Chave PIX:* Adicione aqui a chave PIX para pagamento\n\n`;
+            mensagem += `*Forma de pagamento:* ${pedido.formaPagamento}\n\n`;
+            mensagem += `*APÓS O PIX SER REALIZADO FAVOR ENVIAR COMPROVANTE! Segue chave PIX:*\n\n`
+            mensagem += `*DESTINATÓRIO: Dionata Elieser de Fraga Sales*\n`
+            mensagem += `*Chave PIX:* 51997992251\n\n`;
         } else {
             mensagem += `*Forma de pagamento:* ${pedido.formaPagamento}\n`;
         }
