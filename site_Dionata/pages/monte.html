@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="PT_br">
+<html>
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,6 +9,10 @@
             href="../images/logo.png"
             type="image/x-icon"
         />
+
+        <!-- Inclua os scripts do Firebase -->
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
         <link rel="stylesheet" href="../Style/monte.css" />
         <script defer src="../Scrypt/moente.js"></script>
@@ -316,31 +320,32 @@
                 </div>
             </main>
 
-                        <!-- Produto 12 - Sobre Coxa recheada -->
-                        <main class="product" data-index="11">
-                            <img
-                                src="../images/sobre-coxa.webp"
-                                alt="Coxa + Sobre Cocha recheada com bacon e quiejo"
-                                class="imgCarne"
-                            />
-                            <span class="titleProduct"
-                                >Coxa + Sobre Cocha recheada com bacon e queijo <br />R$14,00
-                                <p>unidade</p>
-                                <p class="unidade">0</p></span
-                            >
-                            <div class="button-container">
-                                <img
-                                    src="../images/adicionar.png"
-                                    alt="adicionar"
-                                    class="btnAdicionar"
-                                />
-                                <img
-                                    src="../images/retirar.png"
-                                    alt="retirar"
-                                    class="btnRetirar"
-                                />
-                            </div>
-                        </main>
+            <!-- Produto 12 - Sobre Coxa recheada -->
+            <main class="product" data-index="11">
+                <img
+                    src="../images/sobre-coxa.webp"
+                    alt="Coxa + Sobre Cocha recheada com bacon e quiejo"
+                    class="imgCarne"
+                />
+                <span class="titleProduct"
+                    >Coxa + Sobre Cocha recheada com bacon e queijo
+                    <br />R$14,00
+                    <p>unidade</p>
+                    <p class="unidade">0</p></span
+                >
+                <div class="button-container">
+                    <img
+                        src="../images/adicionar.png"
+                        alt="adicionar"
+                        class="btnAdicionar"
+                    />
+                    <img
+                        src="../images/retirar.png"
+                        alt="retirar"
+                        class="btnRetirar"
+                    />
+                </div>
+            </main>
 
             <!-- Produto 13 - Refrigerante Coca-Cola -->
             <main class="product" data-index="12">
