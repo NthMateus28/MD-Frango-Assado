@@ -73,29 +73,53 @@
                     </td>
                 </table>
 
-                <form class="formulario">
+                <form
+                    class="formulario"
+                    action="https://api.sheetmonkey.io/form/fabosBaewTP8XPKB4EV8Xh"
+                    method="post"
+                >
                     <div class="forms">
-                        <label for="name">Nome:</label>
+                        <label for="nome">Nome:</label>
                         <input
                             type="text"
                             id="nome"
+                            name="Nome"
                             class="input"
                             placeholder="Ex.:Mateus"
+                            required
                         />
 
-                        <label for="Telefone">Telefone:</label>
+                        <label for="telefone">Telefone:</label>
                         <input
                             type="text"
                             id="telefone"
+                            name="Telefone"
                             class="input"
                             placeholder="Ex.:(99) 99999-9999"
+                            required
                         />
+
+                        <!-- Adicione os campos ocultos para os dados que serão coletados no JavaScript -->
+                        <input
+                            type="hidden"
+                            id="tipoRetirada"
+                            name="Tipo de retirada"
+                        />
+                        <input type="hidden" id="frete" name="Frete" />
+                        <input
+                            type="hidden"
+                            id="somaProdutos"
+                            name="Soma dos produtos"
+                        />
+                        <!-- Adicione mais campos conforme necessário -->
+
                         <label for="tirarBalcao">
                             <input
                                 type="radio"
                                 id="tirarBalcao"
                                 name="retirada"
                                 value="Retirar no Balcão"
+                                onclick="atualizarDadosForm('Retirar no Balcão')"
                             />
                             Tirar no Balcão
                         </label>
@@ -106,6 +130,7 @@
                                 id="teleEntrega"
                                 name="retirada"
                                 value="Tele Entrega"
+                                onclick="atualizarDadosForm('Tele Entrega')"
                             />
                             Tele-Entrega
                         </label>
