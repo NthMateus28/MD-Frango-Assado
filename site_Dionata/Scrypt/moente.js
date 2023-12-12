@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function salvarProduto(index, quantidade) {
-        const product = document.querySelectorAll(".product")[index];
+        const product = products[index]; // Correção aqui
         const titleProduct = product.querySelector(".titleProduct");
         const unidade = product.querySelector(".unidade");
 
@@ -120,6 +120,29 @@ document.addEventListener("DOMContentLoaded", function () {
             );
         }
     }
+
+    products.forEach((product, index) => {
+        const btnAdicionar = product.querySelector(".btnAdicionar");
+        const btnRetirar = product.querySelector(".btnRetirar");
+        const unidade = product.querySelector(".unidade");
+
+        btnAdicionar.addEventListener("click", () => {
+            let valorAtual = parseInt(unidade.textContent);
+            unidade.textContent = valorAtual + 1;
+
+            salvarProduto(index, valorAtual + 1);
+            atualizarValorFinal();
+        });
+
+        btnRetirar.addEventListener("click", () => {
+            let valorAtual = parseInt(unidade.textContent);
+            if (valorAtual > 0) {
+                unidade.textContent = valorAtual - 1;
+                salvarProduto(index, valorAtual - 1);
+                atualizarValorFinal();
+            }
+        });
+    });
 
     // Desabilita todos os produtos indisponíveis de uma vez
     function desabilitarProdutosIndisponiveis(disponibilidadeProdutos) {
@@ -161,7 +184,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Inicialmente, desabilita os produtos indisponíveis
     carregarDisponibilidade();
 
-    // Evento para atualizar a disponibilidade dos produtos
     database.ref("produtos").on("value", (snapshot) => {
         const disponibilidadeProdutos = snapshot.val();
         desabilitarProdutosIndisponiveis(disponibilidadeProdutos);
