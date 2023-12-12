@@ -1,0 +1,51 @@
+@import url(../Style/style.css);
+
+.item {
+    border: 1px solid #333;
+    border-radius: 4px;
+    margin: 20px;
+    display: flex;
+    background-color: aliceblue;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5%;
+}
+
+.item > img {
+    width: 10%;
+    border-radius: 5px;
+}
+
+.item > span {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 2rem;
+}
+
+.buttons {
+    margin-right: 2%;
+}
+
+.buttons > button:nth-child(1) {
+    font-family: "Montserrat", sans-serif;
+    width: 100%;
+    height: 50px;
+    background-color: #4ba1ec;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.buttons > button:nth-child(2) {
+    font-family: "Montserrat", sans-serif;
+    width: 100%;
+    height: 50px;
+    background-color: red;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+}
