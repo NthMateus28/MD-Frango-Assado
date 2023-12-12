@@ -1,23 +1,41 @@
-const express = require("express");
-const app = express();
-const PORT = 3000;
+const mysql = require("mysql");
 
-let pedidos = [];
-
-app.use(express.json());
-
-// Rota para receber os pedidos
-app.post("/receberPedido", (req, res) => {
-    const novoPedido = req.body;
-    pedidos.push(novoPedido);
-    res.json({ message: "Pedido recebido com sucesso!" });
+// Configuração da conexão com o banco de dados
+const connection = mysql.createConnection({
+    host: "seu_host",
+    user: "seu_usuario",
+    password: "sua_senha",
+    database: "seu_banco_de_dados",
 });
 
-// Rota para fornecer os dados dos pedidos
-app.get("/pedidos", (req, res) => {
-    res.json(pedidos);
+// Conecta ao banco de dados
+connection.connect((err) => {
+    if (err) {
+        console.error("Erro ao conectar ao banco de dados:", err);
+        throw err;
+    }
+    console.log("Conexão bem sucedida!");
 });
 
-app.listen(PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+// Dados do cliente
+const clienteData = {
+    nome: "Nome do Cliente",
+    telefone: "123456789",
+    tipo_retirada: "Tele Entrega",
+    bairro: "Bairro do Cliente",
+    endereco: "Endereço do Cliente",
+    forma_pagamento: "Cartão de Crédito",
+};
+
+// Inserir cliente na tabela Clientes
+connection.query(
+    "INSERT INTO Clientes SET ?",
+    clienteData,
+    (error, results) => {
+        if (error) throw error;
+        console.log("Cliente inserido com sucesso!");
+    }
+);
+
+// Fecha a conexão com o banco de dados ao final das operações
+connection.end();
