@@ -49,3 +49,29 @@
     margin: 10px;
     cursor: pointer;
 }
+
+@media screen and (max-width: 768px){
+    .item {
+        border: 1px solid #333;
+        border-radius: 4px;
+        margin: 20px;
+        display: flex;
+        flex-direction: column;
+        background-color: aliceblue;
+        align-items: center;
+        padding: 0.5%;
+    }
+
+    .item > img {
+        margin-top: 15px;
+        width: 90%;
+        border-radius: 5px;
+    }
+
+    .item > span {
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        font-size: 2rem;
+        text-align: center;
+    }
+}
