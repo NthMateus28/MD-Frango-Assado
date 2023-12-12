@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
             mensagem += `Frete: ${pedido.frete}\n`;
             mensagem += `Total: ${pedido.total}\n`;
 
-            const linkWhatsApp = `https://api.whatsapp.com/send?phone=5554991965403&text=${encodeURIComponent(
+            const linkWhatsApp = `https://api.whatsapp.com/send?phone=5551980119568&text=${encodeURIComponent(
                 mensagem
             )}`;
             window.open(linkWhatsApp);
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
             mensagem += `Frete: ${pedido.frete}\n`;
             mensagem += `Total: ${pedido.total}\n`;
 
-            const linkWhatsApp = `https://api.whatsapp.com/send?phone=5554991965403&text=${encodeURIComponent(
+            const linkWhatsApp = `https://api.whatsapp.com/send?phone=5551980119568&text=${encodeURIComponent(
                 mensagem
             )}`;
             window.open(linkWhatsApp);
