@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const pedido = {
             nome,
-            telefone, // Salvar o valor do telefone, não a referência do elemento
+            telefone,
             tipoRetirada,
             bairro,
             endereco,
@@ -100,52 +100,48 @@ document.addEventListener("DOMContentLoaded", () => {
             total,
         };
 
-        // Salvar os dados do pedido no localStorage
         localStorage.setItem("pedido", JSON.stringify(pedido));
     }
 
     function enviarPedidoWhatsApp() {
         const pedido = JSON.parse(localStorage.getItem("pedido"));
 
-        let mensagem = `Quero realizar meu pedido! Segue os dados do meu Pedido:\n\n`;
-        mensagem += `*Nome:* ${pedido.nome}\n`;
-        mensagem += `*Telefone:* ${pedido.telefone}\n`;
-        mensagem += `*Tipo de retirada:* ${pedido.tipoRetirada}\n`;
+        let mensagem = `Quero realizar meu pedido! Segue os dados do meu Pedido:\n\n\n`;
+        mensagem += `*Nome:* ${pedido.nome}\n\n`;
+        mensagem += `*Telefone:* ${pedido.telefone}\n\n`;
+        mensagem += `*Tipo de retirada:* ${pedido.tipoRetirada}\n\n`;
 
         if (pedido.tipoRetirada === "Tele Entrega") {
-            mensagem += `*Bairro:* ${pedido.bairro}\n`;
-            mensagem += `*Endereço:* ${pedido.endereco}\n`;
+            mensagem += `*Bairro:* ${pedido.bairro}\n\n`;
+            mensagem += `*Endereço:* ${pedido.endereco}\n\n`;
         }
 
         if (pedido.formaPagamento === "PIX") {
             mensagem += `*Forma de pagamento:* ${pedido.formaPagamento}\n\n`;
-            mensagem += `*APÓS O PIX SER REALIZADO FAVOR ENVIAR COMPROVANTE! Segue chave PIX:*\n\n`
-            mensagem += `*DESTINATÓRIO: Dionata Elieser de Fraga Sales*\n`
-            mensagem += `*Chave PIX:* 51997992251\n\n`;
+            mensagem += `*Chave PIX:* Adicione aqui a chave PIX para pagamento\n\n\n`;
         } else {
-            mensagem += `*Forma de pagamento:* ${pedido.formaPagamento}\n`;
+            mensagem += `*Forma de pagamento:* ${pedido.formaPagamento}\n\n`;
         }
 
         mensagem += `*Produtos Selecionados:*\n`;
 
-        // Adicionando detalhes dos produtos
         for (let i = 0; i < localStorage.length; i++) {
             let key = localStorage.key(i);
             if (key.startsWith("produto_")) {
                 let produto = JSON.parse(localStorage.getItem(key));
                 mensagem += `-${produto.nome}: ${produto.quantidade}x - R$${(
                     produto.valor * produto.quantidade
-                ).toFixed(2)}\n`;
+                ).toFixed(2)}\n\n`;
             }
         }
 
-        mensagem += `\n*Soma dos produtos:* ${pedido.somaProdutos}\n`;
-        mensagem += `*Frete:* ${pedido.frete}\n`;
-        mensagem += `*Total:* ${pedido.total}\n\n`;
+        mensagem += `\n*Soma dos produtos:* ${pedido.somaProdutos}\n\n`;
+        mensagem += `*Frete:* ${pedido.frete}\n\n`;
+        mensagem += `*Total:* ${pedido.total}\n\n\n`;
         mensagem += `*CASO QUEIRA ACOMPANHAR SEU PEDIDO É SÓ CLICAL NO SEGUINTE LINK:*\n\n`;
         mensagem += `https://bit.ly/Acompanhar_Pedido`;
 
-        const linkWhatsApp = `https://api.whatsapp.com/send?phone=5551980119568&text=${encodeURIComponent(
+        const linkWhatsApp = `https://api.whatsapp.com/send?phone=5554991965403&text=${encodeURIComponent(
             mensagem
         )}`;
 
@@ -153,7 +149,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const salvarPedidoButton = document.getElementById("enviarPedidoButton");
-    salvarPedidoButton.addEventListener("click", salvarPedidoLocal);
+    salvarPedidoButton.addEventListener("click", () => {
+        salvarPedidoLocal();
+        enviarDadosParaSheetmonkey(); // Adicionando chamada para enviar dados para o Sheetmonkey
+        enviarPedidoWhatsApp();
+    });
 
     teleEntregaRadio.addEventListener("change", () => {
         mostrarOcultarCamposTeleEntrega();
@@ -167,7 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     bairrosSelect.addEventListener("change", calcularFrete);
 
-    // Chama o evento de mudança inicialmente para esconder os elementos se Tele-Entrega não estiver selecionado
     mostrarOcultarCamposTeleEntrega();
 
     window.onload = () => {
@@ -179,13 +178,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 let produto = JSON.parse(localStorage.getItem(key));
                 total += produto.valor * produto.quantidade;
 
-                // Cria uma nova linha na tabela para cada produto
                 let newRow = document.createElement("tr");
                 let nameCell = document.createElement("td");
                 let valorCell = document.createElement("td");
                 let quantidadeCell = document.createElement("td");
 
-                // Define o conteúdo das células com os valores do produto
                 nameCell.textContent = produto.nome;
                 valorCell.textContent = `R$${(
                     produto.valor * produto.quantidade
@@ -200,9 +197,80 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         finalPrice.textContent = `R$${total.toFixed(2)}`;
-        calcularTotal(); // Chama o cálculo do total após carregar os produtos
+        calcularTotal();
     };
 
     const enviarPedidoButton = document.getElementById("enviarPedidoButton");
     enviarPedidoButton.addEventListener("click", enviarPedidoWhatsApp);
+
+    function enviarDadosParaSheetmonkey() {
+        const url = "https://api.sheetmonkey.io/form/fabosBaewTP8XPKB4EV8Xh";
+
+        const nome = document.getElementById("nome").value;
+        const telefone = document.getElementById("telefone").value;
+        const tipoRetirada = document.querySelector(
+            'input[name="retirada"]:checked'
+        ).value;
+        const bairro = document.getElementById("bairros").value;
+        const endereco = document.getElementById("endereco").value;
+        const formaPagamento = document.getElementById("formaPagamento").value;
+        const somaProdutos = document.getElementById("finalPrice").textContent;
+        const frete = document.getElementById("finalFrete").textContent;
+        const total = document.getElementById("finalTotal").textContent;
+
+        const produtos = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i);
+            if (key.startsWith("produto_")) {
+                let produto = JSON.parse(localStorage.getItem(key));
+                produtos.push({
+                    Nome: produto.nome,
+                    Quantidade: produto.quantidade,
+                    ValorUnitario: produto.valor,
+                    ValorTotal: produto.valor * produto.quantidade,
+                });
+            }
+        }
+
+        const data = {
+            Nome: nome,
+            Telefone: telefone,
+            "Tipo de retirada": tipoRetirada,
+            Bairro: bairro,
+            Endereco: endereco,
+            "Forma de pagamento": formaPagamento,
+            "Soma dos produtos": somaProdutos,
+            Frete: frete,
+            Total: total,
+            Produtos: JSON.stringify(produtos), // Serializa os objetos em JSON
+            // Adicione mais campos conforme necessário
+        };
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+            .then((response) => {
+                if (response.ok) {
+                    console.log(
+                        "Dados enviados com sucesso para o Sheetmonkey!"
+                    );
+                    localStorage.removeItem("pedido");
+                } else {
+                    console.error(
+                        "Erro ao enviar dados para o Sheetmonkey:",
+                        response.status
+                    );
+                }
+            })
+            .catch((error) => {
+                console.error(
+                    "Erro ao enviar dados para o Sheetmonkey:",
+                    error
+                );
+            });
+    }
 });
