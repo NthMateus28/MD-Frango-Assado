@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
         mensagem += `*CASO QUEIRA ACOMPANHAR SEU PEDIDO É SÓ CLICAL NO SEGUINTE LINK:*\n\n`;
         mensagem += `https://bit.ly/Acompanhar_Pedido`;
 
-        const linkWhatsApp = `https://api.whatsapp.com/send?phone=5554991965403&text=${encodeURIComponent(
+        const linkWhatsApp = `https://api.whatsapp.com/send?phone=5551980119586&text=${encodeURIComponent(
             mensagem
         )}`;
 
