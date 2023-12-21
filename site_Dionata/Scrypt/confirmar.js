@@ -219,16 +219,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const total = document.getElementById("finalTotal").textContent;
 
         const produtos = [];
+        let produtosString = ""; // Cabeçalhos das colunas
+
         for (let i = 0; i < localStorage.length; i++) {
             let key = localStorage.key(i);
             if (key.startsWith("produto_")) {
                 let produto = JSON.parse(localStorage.getItem(key));
-                produtos.push({
-                    Nome: produto.nome,
-                    Quantidade: produto.quantidade,
-                    ValorUnitario: produto.valor,
-                    ValorTotal: produto.valor * produto.quantidade,
-                });
+                produtosString += `Nome: ${produto.nome}\nQuantidade: ${produto.quantidade}\nValor: ${produto.valor}\n\n`;
             }
         }
 
@@ -242,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "Soma dos produtos": somaProdutos,
             Frete: frete,
             Total: total,
-            Produtos: JSON.stringify(produtos), // Serializa os objetos em JSON
+            Produtos: produtosString, // Agora é uma string formatada com quebras de linha para cada produto
             // Adicione mais campos conforme necessário
         };
 
