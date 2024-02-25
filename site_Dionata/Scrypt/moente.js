@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const products = document.querySelectorAll(".product");
     const valorFinalElement = document.querySelector(".resultadoFinal");
-    const precos = [45, 55, 45, 50, 48, 5, 3, 2, 6, 6, 4.5, 15, 12];
+    const precos = [50, 55, 45, 50, 48, 5, 3, 2, 6, 6, 4.5, 15, 12];
 
     // Sua configuração do Firebase
     const firebaseConfig = {
