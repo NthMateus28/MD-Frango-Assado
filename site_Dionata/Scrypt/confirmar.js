@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (pedido.formaPagamento === "PIX") {
             mensagem += `*Forma de pagamento:* ${pedido.formaPagamento}\n\n`;
-            mensagem += `*Chave PIX:* Adicione aqui a chave PIX para pagamento\n\n\n`;
+            mensagem += `*AQUI EM BAIXO ESTÁ A CHAVE PIX PARA O PAGAMENTO*\n*Chave PIX:* 51 998038154\nRemetente: Dionata Eliéser de Fraga Sales\nBanco NUBANK\n\n\n`;
         } else {
             mensagem += `*Forma de pagamento:* ${pedido.formaPagamento}\n\n`;
         }
